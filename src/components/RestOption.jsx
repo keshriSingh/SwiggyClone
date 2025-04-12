@@ -5,7 +5,7 @@ function RestOption(){
     useEffect(()=>{
 
       async function FetchData(){
-        const ProxyServer = "https://thingproxy.freeboard.io/fetch/";
+        const ProxyServer = "https://corsproxy.io/?";
         const SwiggyAPI = "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.6327&lng=77.2198&is-seo-homepage-enabled=true";
         const response = await fetch(ProxyServer+SwiggyAPI);
         const data = await response.json();
