@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router'
 import Footer from "./Footer"
 import InnerHeader from './InnerHeader'
+import Shimmer from './Shimmer';
 
 
 function RestCard({data}) {
@@ -9,7 +10,10 @@ function RestCard({data}) {
   return (
     <div>
        <InnerHeader/>
-        <div className='w-[80%] mx-auto border-b border-gray-500 mt-4 pb-12'>
+       {
+        data?.cards?.[0].card?.card?.imageGridCards?.info ? 
+        <div>
+              <div className='w-[80%] mx-auto border-b border-gray-500 mt-4 pb-12'>
             <h2 className='text-xl font-bold'>{data?.cards?.[0]?.card?.card?.header?.title}</h2>
             <div className='flex overflow-x-auto scrollbar-hide'>
                 {data?.cards?.[0].card?.card?.imageGridCards?.info.map((value)=>
@@ -228,6 +232,8 @@ function RestCard({data}) {
             </div>
         </div>
         <Footer/>
+        </div> :<Shimmer/>
+       }
     </div>
   )
 }
