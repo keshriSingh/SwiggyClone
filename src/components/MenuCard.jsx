@@ -9,15 +9,17 @@ function MenuCard({data,selected}) {
     return item?.card?.info?.itemAttribute?.vegClassifier === selected;
   }) || [];
 
-
   const shouldShowToggle = data?.itemCards?.length > 0;
+  if(data.title==="Top Picks"){
+    return
+  }
 
   return (
     <div >
       <div className='mt-8'>
         <div className='w-full h-5 bg-gray-400 mb-9'></div>
        <div className='flex justify-between'>
-       <h2 className='text-xl font-bold flex items-center'>{data?.title} {(filteredItems.length>0 && `(${filteredItems?.length})`)}</h2>
+       <h2 className={`${data?.['@type']?"text-xl":"text-lg text-gray-800"} font-bold flex items-center`}>{data?.title} {(filteredItems.length>0 && `(${filteredItems?.length})`)}</h2>
        {(shouldShowToggle) && (filteredItems.length>0) && (
           <p 
             onClick={() => setIsOpen(!isOpen)} 

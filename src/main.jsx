@@ -10,18 +10,21 @@ import SrearchBox from './components/SearchBox.jsx';
 import { Provider } from 'react-redux';
 import store from './components/Store/Store.jsx';
 import CheckOut from './components/CheckOut.jsx';
+import Find from './components/Find.jsx';
+
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
+  <BrowserRouter>
    <Provider store={store} >
    <Routes>
       <Route path='/' element={<App/>}>
       <Route index element={<Home/>}/>
       <Route path='restaurant' element={<RestOption/>}/>
-      <Route path='city/delhi/:id' element={<ResturantMenu/>}/>
-      <Route path='city/delhi/:id/search' element={<SrearchBox/>}/>
+      <Route path='search' element={<Find/>}/>
+      <Route path='city/:id' element={<ResturantMenu/>}/>
+      <Route path='city/:id/search' element={<SrearchBox/>}/>
       <Route path='checkout' element={<CheckOut/>}/>
       </Route>
     </Routes>

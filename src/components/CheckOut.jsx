@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function CheckOut() {
     const cart = useSelector(state => state.cartSlice.items);
-    const total = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+    const total = cart.reduce((sum, item) => sum + (item.price/100 * (item.quantity || 1)), 0);
 
     return (
         <div className="min-h-screen bg-gray-50 p-4 md:p-8">

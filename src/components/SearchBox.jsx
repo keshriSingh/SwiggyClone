@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import Card from './Card';
 import InnerHeader from './InnerHeader';
+import { useSelector } from 'react-redux';
 
 function SearchBox() {
   const [input, setInput] = useState('');
@@ -9,11 +10,12 @@ function SearchBox() {
   const [recommended, setRecommended] = useState([]);
   const [ne, setNe] = useState([]);
   const { id } = useParams();
+  const {lat,lng} = useSelector(state=>state.placeSlice);
 
   useEffect(() => {
     async function FetchData() {
-      const ProxyServer = "https://thingproxy.freeboard.io/fetch/";
-      const SwiggyAPI = `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.6327&lng=77.2198&restaurantId=${id}`;
+      const ProxyServer = "https://cors-by-codethread-for-swiggy.vercel.app/cors";
+      const SwiggyAPI = `/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=${lat}&lng=${lng}&restaurantId=${id}`;
       const response = await fetch(ProxyServer + SwiggyAPI);
       const data = await response.json();
       setRestaurantData(data.data?.cards);
@@ -64,12 +66,15 @@ function SearchBox() {
           value={input}
         />
       </div>
-      <div>
-        {uniqueItems
-          .filter(item => item?.card?.info?.id)
-          .filter((item)=>(item?.card?.info?.name.toLowerCase().includes(input.toLowerCase())))
-          .map((item) =><Card key={item?.card?.info?.id} data={item?.card?.info} />)}
-      </div>
+     {
+      input?<div>
+      {uniqueItems
+        .filter(item => item?.card?.info?.id)
+        .filter((item)=>(item?.card?.info?.name.toLowerCase().includes(input.toLowerCase())))
+        .map((item) =><Card key={item?.card?.info?.id} data={item?.card?.info} />)
+      }
+       </div>:''
+     }
     </div>
     </>
   )

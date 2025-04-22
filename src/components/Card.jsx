@@ -32,10 +32,13 @@ function Card({data}){
        <span className='text-green-700 text-sm inline-flex items-center font-bold'><i className="ri-star-fill text-green-700 text-sm"></i> {data?.ratings?.aggregatedRating?.rating}</span>
        <span className='inline-flex items-center text-sm ml-0.5'>({data?.ratings?.aggregatedRating?.ratingCountV2})</span>
        </div>
-        <p className='text-sm text-gray-500'>{data?.description}</p>
+        <p className='text-sm flex flex-wrap overflow-hidden text-gray-500'>{data?.description}</p>
       </div>
-      <div className='relative flex items-center pt-6' >
-        <img className='w-39 h-36 object-cover rounded-xl' src={`https://media-assets.swiggy.com/swiggy/image/upload/${data?.imageId}`} alt="" />
+      <div className='relative w-39 h-36 flex items-center pt-6' >
+       {
+        data?.imageId?<img className='w-39 h-36 object-cover rounded-xl' src={`https://media-assets.swiggy.com/swiggy/image/upload/${data?.imageId}`} alt="" />:''
+         
+       }
        {
         (count?
           <div className='absolute text-green-600 top-36 left-7 px-4 py-1 rounded-md shadow bg-white flex gap-4 text-2xl font-bold hover:cursor-pointer'>
@@ -43,7 +46,7 @@ function Card({data}){
             <button>{count}</button>
             <button className='hover:cursor-pointer' onClick={()=>handleIncrement()}>+</button>
           </div>
-        :<button onClick={()=>handleAdd()} className='absolute hover:cursor-pointer bg-white text-green-600 text-lg left-5 z-10 top-36 font-bold px-10 py-2 shadow rounded-md'>ADD</button>)
+        :<button onClick={()=>handleAdd()} className='absolute hover:cursor-pointer bg-white text-green-600 text-base lg:text-lg left-6 lg:left-5 z-10 top-32 font-bold px-6 lg:px-10 py-2 shadow-xl rounded-md'>ADD</button>)
        }
       </div>
     </div>
