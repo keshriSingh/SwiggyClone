@@ -21,7 +21,7 @@ function ResturantMenu() {
        const response = await fetch(ProxyServer+SwiggyAPI);
        const data = await response.json();
        setRestaurantData( data.data?.cards[2]?.card?.card?.info);
-       setDeals(data.data?.cards[3]?.card.card?.gridElements?.infoWithStyle?.offers)
+       setDeals(data.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.offers)
        let tempData = data.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
        setRecommended(tempData.filter((item)=> {
          const card = item?.card?.card;
